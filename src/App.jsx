@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <Router basename='/Ecom'>
+    <Router>
       <Navbar cart={cart} onCategoryChange={handleCategoryChange} onSearch={handleSearchChange} />
       <Routes>
         <Route path="/" element={<Home />} />
