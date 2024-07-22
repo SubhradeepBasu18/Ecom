@@ -48,7 +48,7 @@ function App() {
         <Route path="/cart" element={<Cart cart={cart} removefromCart={removefromCart} />} />
         <Route path="/checkoutpage" element={<CheckoutPage cart={cart} onCheckout={handleCheckout} />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Signup" element={<Signup />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/Account" element={<Account orders={cart} />} />
       </Routes>
       <Footers />
