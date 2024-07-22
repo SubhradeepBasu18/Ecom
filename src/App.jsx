@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Signup from './pages/Signup';
 import Account from './pages/Account';
 import PassRecover from './pages/PassRecover';
-import ResetPassword from './pages/ResetPassword';
+import ResetPassword from './pages/newPass';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('');
