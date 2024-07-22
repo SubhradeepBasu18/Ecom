@@ -1,7 +1,3 @@
-Here's the updated README with the Contact Us page marked as "coming soon":
-
----
-
 # Ecom 🛒
 
 Welcome to **Ecom**, an e-commerce platform built with React and Vite, using Appwrite for backend services. 
