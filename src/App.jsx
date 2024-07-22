@@ -10,6 +10,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import Login from "./pages/Login";
 import Signup from './pages/Signup';
 import Account from './pages/Account';
+import PassRecover from './pages/PassRecover';
+import ResetPassword from './pages/newPass';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -49,6 +51,8 @@ function App() {
         <Route path="/checkoutpage" element={<CheckoutPage cart={cart} onCheckout={handleCheckout} />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/Passrecover" element={<PassRecover/>} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/Account" element={<Account orders={cart} />} />
       </Routes>
       <Footers />

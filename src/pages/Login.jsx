@@ -13,7 +13,8 @@ function Login() {
         e.preventDefault()
         try {
             await account.createEmailPasswordSession(user.email, user.password)
-            navigate("/")
+            navigate("/account")
+            alert("Login Success")
         } catch (error) {
             console.log(error);
         }
@@ -83,6 +84,16 @@ function Login() {
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Don't have Account, Sign Up
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="text-sm">
+                  <a
+                    href="/PassRecover"
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Forgot Password
                   </a>
                 </div>
               </div>

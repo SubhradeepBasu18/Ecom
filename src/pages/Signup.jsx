@@ -25,7 +25,8 @@ function Signup() {
         promise.then(
             function(response){
                 console.log(response);
-                navigate("/") //success
+                navigate("/account") //success
+                alert("Signup Success")
             },
             function(error) {
                 console.log(error); // Failure
