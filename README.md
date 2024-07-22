@@ -60,6 +60,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Vite](https://vitejs.dev/)
 - [Appwrite](https://appwrite.io/)
 
----
 
-Feel free to customize it further as per your requirements.
