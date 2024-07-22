@@ -9,7 +9,7 @@ function PassRecover() {
     const recover = async (e) => {
         e.preventDefault();
         try {
-            const promise = account.createRecovery(user.email, 'https://ecom-pi-six.vercel.app///reset-password/:userId/:secret');
+            const promise = account.createRecovery(email, 'https://ecom-pi-six.vercel.app/reset-password');
             promise.then(
                 function(response) {
                     console.log(response);
@@ -17,23 +17,19 @@ function PassRecover() {
                     navigate('/login');
                 },
                 function(error) {
-                    console.log(error);
+                    console.error("Error details:", error); // Detailed error logging
                     alert('Error sending recovery email. Please try again.');
                 }
             );
         } catch (error) {
-            console.log(error);
+            console.error("Unexpected error:", error); // Detailed error logging
             alert('An unexpected error occurred. Please try again.');
         }
     };
 
     const handleChange = (e) => {
-        setUser({
-            ...user,
-            [e.target.name]: e.target.value
-        });
+        setEmail(e.target.value);
     };
-    
 
     return (
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
