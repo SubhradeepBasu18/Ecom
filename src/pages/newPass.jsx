@@ -1,70 +1,72 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { account } from '../Appwrite/config';
 
 function ResetPassword() {
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
-    const userId = searchParams.get('userId');
-    const secret = searchParams.get('secret');
-
+    const { userId, secret } = useParams();
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
-    const resetPassword = async (e) => {
+    const handleReset = async (e) => {
         e.preventDefault();
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-
         try {
-            const response = await account.updateRecovery(userId, secret, password, confirmPassword);
-            console.log(response);
-            alert("Password reset successful!");
-            navigate("/login");
+            const promise = account.updateRecovery(userId, secret, password);
+            promise.then(
+                function(response) {
+                    console.log(response);
+                    alert('Password successfully reset');
+                    navigate('/login');
+                },
+                function(error) {
+                    console.log(error);
+                    alert('Error resetting password. Please try again.');
+                }
+            );
         } catch (error) {
-            console.error("Password reset failed:", error);
-            alert("An error occurred. Please try again.");
+            console.log(error);
+            alert('An unexpected error occurred. Please try again.');
         }
     };
 
+    const handleChange = (e) => {
+        setPassword(e.target.value);
+    };
+
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Reset Password</h1>
-            <form onSubmit={resetPassword} className="space-y-4">
-                <div>
-                    <label htmlFor="password" className="block text-lg font-medium">New Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="border border-gray-300 p-2 rounded-md w-full"
-                    />
+        <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="text-center font-bold text-2xl">Reset Password</div>
+            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <form className="space-y-6" onSubmit={handleReset}>
+                        <div>
+                            <label
+                                htmlFor="password"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                New Password
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    required
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Reset Password
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <label htmlFor="confirmPassword" className="block text-lg font-medium">Confirm New Password:</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                        className="border border-gray-300 p-2 rounded-md w-full"
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-lg transition duration-200"
-                >
-                    Reset Password
-                </button>
-            </form>
+            </div>
         </div>
     );
 }
