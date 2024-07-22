@@ -9,7 +9,7 @@ function PassRecover() {
     const recover = async (e) => {
         e.preventDefault();
         try {
-            const promise = account.createRecovery(email, 'http://localhost:3000/reset-password');
+            const promise = account.createRecovery(email, 'https://ecom-pi-six.vercel.app//reset-password');
             promise.then(
                 function(response) {
                     console.log(response);
