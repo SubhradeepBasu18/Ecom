@@ -6,11 +6,11 @@ function ResetPassword() {
     const navigate = useNavigate();
     const { userId, secret } = useParams();
     const [password, setPassword] = useState('');
-
+    console.log(userId, secret);
     const handleReset = async (e) => {
         e.preventDefault();
         try {
-            const promise = account.updateRecovery(userId, secret, password);
+            const promise = account.updateRecovery(userId, secret, password,password);
             promise.then(
                 function(response) {
                     console.log(response);
@@ -19,6 +19,7 @@ function ResetPassword() {
                 },
                 function(error) {
                     console.log(error);
+                    console.log(userId, secret);
                     alert('Error resetting password. Please try again.');
                 }
             );
