@@ -9,7 +9,7 @@ function PassRecover() {
     const recover = async (e) => {
         e.preventDefault();
         try {
-            const promise = account.createRecovery(email, 'https://ecom-pi-six.vercel.app///reset-password/:userId/:secret');
+            const promise = account.createRecovery(user.email, 'https://ecom-pi-six.vercel.app///reset-password/:userId/:secret');
             promise.then(
                 function(response) {
                     console.log(response);
@@ -28,8 +28,12 @@ function PassRecover() {
     };
 
     const handleChange = (e) => {
-        setEmail(e.target.value);
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        });
     };
+    
 
     return (
         <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
